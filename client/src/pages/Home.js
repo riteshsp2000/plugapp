@@ -4,8 +4,7 @@ import { ReactLogo } from '../components/homepage';
 function Home() {
   return (
     <div>
-      <ReactLogo />
-      {process.env.trial}
+      <h2>Hello World</h2>
     </div>
   );
 }
