@@ -11,9 +11,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
 
 module.exports = (env) => {
-  // eslint-disable-next-line
-  console.log('WEBPACK ENV: ', env);
-
   // Variables
   const isProduction = env === 'production';
   const isDev = env === 'development';
@@ -164,6 +161,19 @@ module.exports = (env) => {
       open: true,
     };
   }
+
+  config.resolve = {
+    alias: {
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@assets': path.resolve(__dirname, 'src/assets'),
+      '@hooks': path.resolve(__dirname, 'src/hooks'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
+      '@pages': path.resolve(__dirname, 'src/pages'),
+      '@store': path.resolve(__dirname, 'src/store'),
+    }
+  }
+
+  console.log(config);
 
   return config;
 };

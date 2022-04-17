@@ -39,6 +39,7 @@
     "test:coverage": "jest --coverage --colors"
   },
   "dependencies": {
+    "antd": "^4.19.5",
     "history": "^5.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

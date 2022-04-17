@@ -1,11 +1,13 @@
 import React from 'react';
-import { ReactLogo } from '../components/homepage';
+
+import {FlexBox} from '@components';
 
 function Home() {
   return (
-    <div>
+    <FlexBox>
       <h2>Hello World</h2>
-    </div>
+      <h4>What's up?</h4>
+    </FlexBox>
   );
 }
 

@@ -5,7 +5,7 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import Loadable from 'react-loadable';
 
 // Components
-import ActivityIndicator from '../components/shared/ActivityIndicator';
+import {ActivityIndicator} from '@components';
 
 // Helpers
 import createBrowserHistory from '../utils/history';
