@@ -5,7 +5,7 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import Loadable from 'react-loadable';
 
 // Components
-import {ActivityIndicator} from '@components';
+import { ActivityIndicator } from '@components';
 
 // Helpers
 import createBrowserHistory from '../utils/history';
@@ -13,6 +13,11 @@ import createBrowserHistory from '../utils/history';
 // Asynchronous Loading of Pages in different chunks
 const AsyncHome = Loadable({
   loader: () => import('./Home'),
+  loading: ActivityIndicator,
+});
+
+const AsyncLogin = Loadable({
+  loader: () => import('./Login'),
   loading: ActivityIndicator,
 });
 
@@ -35,6 +40,7 @@ function App() {
     <Router history={createBrowserHistory}>
       <Switch>
         <Route path='/' exact component={AsyncHome} />
+        <Route path='/login' exact component={AsyncLogin} />
         <Redirect to='/' />
       </Switch>
     </Router>
