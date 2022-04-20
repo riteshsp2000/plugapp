@@ -170,8 +170,9 @@ module.exports = (env) => {
       '@utils': path.resolve(__dirname, 'src/utils'),
       '@pages': path.resolve(__dirname, 'src/pages'),
       '@store': path.resolve(__dirname, 'src/store'),
-    }
-  }
+      '@config': path.resolve(__dirname, 'src/config'),
+    },
+  };
 
   console.log(config);
 
