@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // Libraries
+import { onAuthStateChanged } from 'firebase/auth';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import Loadable from 'react-loadable';
 
@@ -8,7 +9,8 @@ import Loadable from 'react-loadable';
 import { ActivityIndicator } from '@components';
 
 // Helpers
-import createBrowserHistory from '../utils/history';
+import history from '../utils/history';
+import { useFirebase } from '@config/firebase';
 
 // Asynchronous Loading of Pages in different chunks
 const AsyncHome = Loadable({
@@ -36,8 +38,23 @@ const AsyncLogin = Loadable({
 // );
 
 function App() {
+  const { auth } = useFirebase();
+
+  useEffect(() => {
+    if (auth) {
+      onAuthStateChanged(auth, (user) => {
+        console.log(user);
+        if (user) {
+          const uid = user.uid;
+        } else {
+          history.push('/login');
+        }
+      });
+    }
+  }, [auth]);
+
   return (
-    <Router history={createBrowserHistory}>
+    <Router history={history}>
       <Switch>
         <Route path='/' exact component={AsyncHome} />
         <Route path='/login' exact component={AsyncLogin} />
