@@ -6,7 +6,7 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import Loadable from 'react-loadable';
 
 // Components
-import { ActivityIndicator } from '@components';
+import { ActivityIndicator, Header } from '@components';
 
 // Helpers
 import createBrowserHistory from '../utils/history';
@@ -66,6 +66,7 @@ function App() {
 
   return (
     <Router history={createBrowserHistory}>
+      {isLoggedIn && <Header />}
       <Switch>
         <PrivateRoute path='/' exact component={AsyncHome} />
         <Route path='/login' exact component={AsyncLogin} />
