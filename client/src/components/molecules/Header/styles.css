@@ -1,0 +1,28 @@
+.header-container {
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: white;
+}
+
+.width-container {
+  max-width: 65em;
+  padding: 30px 20px;
+  margin: 0px auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 1.3rem;
+  margin-bottom: 0px !important;
+}
+
+.link {
+  color: var(--color-primary);
+  margin: 0px 20px;
+  text-decoration: none;
+}
