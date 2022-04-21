@@ -2,12 +2,14 @@ import React from 'react';
 
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { query, collection, getDocs, addDoc, where } from 'firebase/firestore';
+import { useHistory } from 'react-router-dom';
 import { useFirebase } from '@config/firebase';
 
 import LoginScreenImg from '@assets/imgs/loginScreen.png';
 import './styles.css';
 
 const Login = () => {
+  const history = useHistory();
   const { db, auth } = useFirebase();
   const googleProvider = new GoogleAuthProvider();
 
@@ -25,6 +27,8 @@ const Login = () => {
           photoURL: user.photoURL,
         });
       }
+
+      history.push('/');
     } catch (err) {
       console.error(err);
       alert(err.message);

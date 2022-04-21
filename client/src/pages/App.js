@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Libraries
 import { onAuthStateChanged } from 'firebase/auth';
@@ -9,8 +9,10 @@ import Loadable from 'react-loadable';
 import { ActivityIndicator } from '@components';
 
 // Helpers
-import history from '../utils/history';
+import createBrowserHistory from '../utils/history';
 import { useFirebase } from '@config/firebase';
+import { useAuth } from '@store/contexts';
+import { authActionTypes } from '@store/actions';
 
 // Asynchronous Loading of Pages in different chunks
 const AsyncHome = Loadable({
@@ -23,42 +25,50 @@ const AsyncLogin = Loadable({
   loading: ActivityIndicator,
 });
 
-// Function to check the Authenticated status.
-// const isAuthenticated = () => {
-//   // Check the authentication state as per your way of authentication i.e. jwt, sessions, etc
-// };
-
-// Use this Route component for authenticated Routes.
-// eslint-disable-next-line no-unused-vars
-// const PrivateRoute = ({ component: Component, ...rest }) => (
-//   <Route
-//     {...rest}
-//     render={(props) => (isAuthenticated() ? <Component {...props} /> : <Redirect to='/login' />)}
-//   />
-// );
-
 function App() {
   const { auth } = useFirebase();
+  const [, dispatch] = useAuth();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     if (auth) {
       onAuthStateChanged(auth, (user) => {
-        console.log(user);
         if (user) {
-          const uid = user.uid;
+          setIsLoggedIn(true);
+          dispatch({
+            type: authActionTypes.UPDATE_AUTH_STATE,
+            payload: {
+              user: {
+                uid: user.uid,
+                name: user.displayName,
+                email: user.email,
+                photoURL: user.photoURL,
+              },
+            },
+          });
+          createBrowserHistory.push('/');
         } else {
-          history.push('/login');
+          setIsLoggedIn(false);
+          dispatch({
+            type: authActionTypes.SIGNOUT_USER,
+          });
         }
       });
     }
   }, [auth]);
 
+  const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={(props) => (isLoggedIn ? <Component {...props} /> : <Redirect to='/login' />)}
+    />
+  );
+
   return (
-    <Router history={history}>
+    <Router history={createBrowserHistory}>
       <Switch>
-        <Route path='/' exact component={AsyncHome} />
+        <PrivateRoute path='/' exact component={AsyncHome} />
         <Route path='/login' exact component={AsyncLogin} />
-        <Redirect to='/' />
       </Switch>
     </Router>
   );

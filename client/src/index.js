@@ -2,17 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import FirebaseProvider from '@config/firebase';
+import App from '@pages/App';
 
-import App from './pages/App';
-import Root from './config/Root';
+import { AuthProvider } from '@store/contexts';
 
 import './styles.css';
 
 ReactDOM.render(
   <FirebaseProvider>
-    <Root>
+    <AuthProvider>
       <App />
-    </Root>
+    </AuthProvider>
   </FirebaseProvider>,
   document.querySelector('#root'),
 );
