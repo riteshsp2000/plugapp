@@ -10,6 +10,9 @@ jobs:
   firebase-stage-deploy:
     name: Firebase Development Deploy
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
     steps:
       - name: Checkout Repository
         uses: actions/checkout@master
@@ -20,10 +23,10 @@ jobs:
           node-version: '16.x'
 
       - name: Install Dependencies
-        run: cd client && yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile
 
       - name: Build React WebApp
-        run: cd client && yarn build:dev
+        run: yarn build:dev
 
       - name: Deploy to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
