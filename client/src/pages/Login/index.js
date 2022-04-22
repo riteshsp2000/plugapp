@@ -25,6 +25,10 @@ const Login = () => {
           name: user.displayName,
           email: user.email,
           photoURL: user.photoURL,
+          favourites: [],
+          status: "Hey there!, I'm using PlugApp",
+          thumbsUp: 0,
+          thumbsDown: 0,
         });
       }
 
