@@ -31,8 +31,6 @@ function App() {
   const [state, dispatch] = useAuth();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  console.log(state);
-
   const fetchData = async (uid) => {
     const q = query(collection(db, 'users'), where('uid', '==', uid));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {

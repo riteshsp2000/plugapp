@@ -29,6 +29,8 @@ const Login = () => {
           status: "Hey there!, I'm using PlugApp",
           thumbsUp: 0,
           thumbsDown: 0,
+          thumbsUpUsers: [],
+          thumbsDownUsers: [],
         });
       }
 
