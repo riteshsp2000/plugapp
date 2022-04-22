@@ -28,3 +28,43 @@
   font-weight: normal;
   color: var(--color-primary);
 }
+
+.profile-item-container {
+  border-top: 1px dashed var(--color-tertiary);
+  border-bottom: 1px dashed var(--color-tertiary);
+
+  padding: 1.2rem 0.6rem;
+  margin-top: 2rem;
+}
+
+.profile-item-container .status-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.7rem;
+}
+
+.textarea {
+  width: 100%;
+}
+
+.button-container {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button-container .button {
+  background: white;
+  border: 1px solid #016ccb;
+  width: 100px;
+  border-radius: 5px;
+  color: #016ccb;
+  padding: 7px 15px;
+}
+
+.button-container .button:hover {
+  background: #016ccb;
+  color: white;
+}

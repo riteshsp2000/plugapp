@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, FeedItem, Layout } from '@components';
+import { FeedItem, Layout } from '@components';
 
 function Home() {
   return (
