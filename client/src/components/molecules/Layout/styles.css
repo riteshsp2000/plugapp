@@ -1,0 +1,25 @@
+.layout-container {
+  width: 100%;
+  max-width: 65em;
+  height: calc(100vh - 100px);
+
+  margin: 0 auto;
+  margin-top: 100px;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+
+  overflow: hidden;
+}
+
+.layout-container .first-row {
+  width: 60%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding-right: 15px;
+}
+
+.layout-container .second-row {
+  width: 38%;
+}

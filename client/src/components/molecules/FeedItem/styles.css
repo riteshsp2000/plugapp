@@ -8,8 +8,6 @@
   display: flex;
   align-items: stretch;
   justify-content: start;
-
-  margin-top: 100px;
 }
 
 .feeditem-container .photo-url {
