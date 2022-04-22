@@ -5,7 +5,7 @@ import ThumbsDown from '@assets/icons/thumbsDown.svg';
 
 import './styles.css';
 
-const FeedItem = ({ photoUrl, name, status }) => {
+const FeedItem = ({ photoUrl, name, status, updateThumbs, id }) => {
   return (
     <div className='feeditem-container'>
       <img src={photoUrl} alt={name} loading='lazy' className='photo-url' />
@@ -17,9 +17,19 @@ const FeedItem = ({ photoUrl, name, status }) => {
       </div>
 
       <div className='reactions-container'>
-        <img className='thumbsup-icon' src={ThumbsUp} alt='Thumbs Up' />
+        <img
+          className='thumbsup-icon'
+          src={ThumbsUp}
+          alt='Thumbs Up'
+          onClick={() => updateThumbs('thumbsUp', id)}
+        />
 
-        <img className='thumbsup-icon' src={ThumbsDown} alt='Thumbs Down' />
+        <img
+          className='thumbsup-icon'
+          src={ThumbsDown}
+          alt='Thumbs Down'
+          onClick={() => updateThumbs('thumbsDown', id)}
+        />
       </div>
     </div>
   );

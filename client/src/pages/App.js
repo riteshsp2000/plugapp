@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 // Libraries
 import { onAuthStateChanged } from 'firebase/auth';
+import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import Loadable from 'react-loadable';
 
@@ -26,26 +27,33 @@ const AsyncLogin = Loadable({
 });
 
 function App() {
-  const { auth } = useFirebase();
-  const [, dispatch] = useAuth();
+  const { auth, db } = useFirebase();
+  const [state, dispatch] = useAuth();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const fetchData = async (uid) => {
+    const q = query(collection(db, 'users'), where('uid', '==', uid));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const users = [];
+      querySnapshot.forEach((doc) => {
+        users.push({ ...doc.data(), id: doc.id });
+      });
+
+      dispatch({
+        type: authActionTypes.UPDATE_AUTH_STATE,
+        payload: {
+          user: users[0],
+        },
+      });
+    });
+  };
 
   useEffect(() => {
     if (auth) {
       onAuthStateChanged(auth, (user) => {
         if (user) {
           setIsLoggedIn(true);
-          dispatch({
-            type: authActionTypes.UPDATE_AUTH_STATE,
-            payload: {
-              user: {
-                uid: user.uid,
-                name: user.displayName,
-                email: user.email,
-                photoURL: user.photoURL,
-              },
-            },
-          });
+          fetchData(user.uid);
           createBrowserHistory.push('/');
         } else {
           setIsLoggedIn(false);
